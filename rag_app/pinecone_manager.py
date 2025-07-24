@@ -1,28 +1,29 @@
-from operator import index
-
 from pinecone import Pinecone, ServerlessSpec
-from rag_app.config import PINECONE_API_KEY, PINECONE_REGION, PINECONE_INDEX
-from interface import namespace
+from config import PINECONE_API_KEY, PINECONE_REGION, PINECONE_INDEX
+from config import namespace
 
 pc = Pinecone(api_key=PINECONE_API_KEY)
-if PINECONE_INDEX in pc.list_indexes():
+
+indexes_list = [pc_index['name'] for pc_index in pc.list_indexes()]
+
+if PINECONE_INDEX in indexes_list:
     index = pc.Index(PINECONE_INDEX)
 
 def pc_create_index_if_not_exists():
-    if PINECONE_INDEX in pc.list_indexes():
-        pass
-    else:
-        pc.create_index(
-            name=PINECONE_INDEX,
-            dimension=1536,
-            metric="cosine",
-            spec=ServerlessSpec(
-                cloud="aws",
-                region=PINECONE_REGION,
-            )
-        )
+    if PINECONE_INDEX in indexes_list:
+        return
 
-def upsert_to_pinecone(vectors: list):
+    pc.create_index(
+        name=PINECONE_INDEX,
+        dimension=1536,
+        metric="cosine",
+        spec=ServerlessSpec(
+            cloud="aws",
+            region=PINECONE_REGION,
+        )
+    )
+
+def upsert_to_pinecone(vectors: list[tuple[str, list[float]]]):
     index.upsert(
         vectors=vectors,
         namespace=namespace

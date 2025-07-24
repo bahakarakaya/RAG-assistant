@@ -12,8 +12,8 @@ Veri İşleme ve Vektörleştirme
 1- [X] Kullanıcıya özel namespace
 2- [X] Langchain pdf loader entegresi
 3- [X] (Chunking) Langchain RecursiveCharacterTextSplitter ile chunklara böl
-4- [ ] (Embedding) Openai api ile embedding oluşturma
-5- [ ] (Indexing) Vektörleri Pinecone veritabanına yerleştirme
+4- [X] (Embedding) Openai api ile embedding oluşturma
+5- [X] (Indexing) Vektörleri Pinecone veritabanına yerleştirme
 
 
 Soru Cevap mantığının kurulması - RAG Mimarisi
