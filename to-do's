@@ -1,0 +1,27 @@
+Streamlit kullanıcı arayüzünün Tasarımı
+
+1- [X] Uygulamanın başlığı ve kullanıcının ne yapması gerektiğini anlatan kısa bir açıklama olmalı.
+2- [X] Kullanıcının PDF dosyasını seçip yükleyebileceği st.file_uploader eklenmeli.
+3- [X] Kullanıcının mesajını yazacağı metin kutusu (chat_input ? text_input)
+4- [ ] Mesaj geçmişinin gösterileceği alan
+last active olayı
+
+
+Veri İşleme ve Vektörleştirme
+
+1- [X] Kullanıcıya özel namespace
+2- [X] Langchain pdf loader entegresi
+3- [X] (Chunking) Langchain RecursiveCharacterTextSplitter ile chunklara böl
+4- [ ] (Embedding) Openai api ile embedding oluşturma
+5- [ ] (Indexing) Vektörleri Pinecone veritabanına yerleştirme
+
+
+Soru Cevap mantığının kurulması - RAG Mimarisi
+
+1- [ ] Kullanıcı sorduğu soru embeddinge çevirilir.
+2- [ ] (Retrieval) Vector database'de arama yapılır, en yakın embeddingler getirilir.
+2- [ ] Bu embeddinglerden bir chain yapısı kullanılarak bir prompt oluşturulur ve llm'e gönderilir.
+3- [ ] Cevap gelir ve kullanıcıya gösterilir. Konuşma devam eder.
+
+DAHA SONRA EKLENECEKLER
+[ ] Langsmith
