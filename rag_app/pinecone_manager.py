@@ -23,15 +23,21 @@ def pc_create_index_if_not_exists():
         )
     )
 
-def upsert_to_pinecone(vectors: list[tuple[str, list[float]]]):
+def upsert_to_pinecone(vectors: list[tuple[str, list[float], dict]]):
     index.upsert(
         vectors=vectors,
         namespace=namespace
     )
 
 def query_index(vector: list[float]):
-    query_results = index.query(
-        top_k=10,                                   #TODO: examine this later
-        namespace=namespace,
-        vector=vector
-    )
+    try:
+        query_results = index.query(
+            top_k=5,
+            namespace=namespace,
+            vector=vector,
+            include_metadata=True
+        )
+        return query_results
+
+    except Exception as e:
+        raise f"Error querying Pinecone index: {e}"

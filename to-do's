@@ -18,10 +18,16 @@ Veri İşleme ve Vektörleştirme
 
 Soru Cevap mantığının kurulması - RAG Mimarisi
 
-1- [ ] Kullanıcı sorduğu soru embeddinge çevirilir.
-2- [ ] (Retrieval) Vector database'de arama yapılır, en yakın embeddingler getirilir.
-2- [ ] Bu embeddinglerden bir chain yapısı kullanılarak bir prompt oluşturulur ve llm'e gönderilir.
-3- [ ] Cevap gelir ve kullanıcıya gösterilir. Konuşma devam eder.
+1- [X] Kullanıcı sorduğu soru embeddinge çevirilir.
+2- [X] (Retrieval) Vector database'de arama yapılır, en yakın embeddingler getirilir.
+2- [X] Bu embeddinglerden bir chain yapısı kullanılarak bir prompt oluşturulur ve llm'e gönderilir.
+3- [X] Cevap gelir ve kullanıcıya gösterilir. Konuşma devam eder.
+4- [ ] Kullanıcıdan gelen mesajlar ve cevaplar bir konuşma geçmişi olarak saklanmalı.
+5- [ ] Arayüz düzenlenmeli ve kullanıcı deneyimi iyileştirilmeli.
+
 
 DAHA SONRA EKLENECEKLER
 [ ] Langsmith
+
+BELKİ
+[ ] namespace yönetimi

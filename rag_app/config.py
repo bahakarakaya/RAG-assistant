@@ -1,4 +1,5 @@
 import os
+import uuid
 from dotenv import load_dotenv
 from streamlit import session_state
 
@@ -14,5 +15,6 @@ if not PINECONE_API_KEY:
 if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY is not set. Please set it in your environment variables or .env file.")
 
-session_state["namespace"] = ""
-namespace = session_state["namespace"]
+session_state["namespace"] = None
+namespace = f"session_{str(uuid.uuid4())[:6]}"
+session_state["namespace"] = namespace
