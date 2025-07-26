@@ -22,8 +22,11 @@ Soru Cevap mantığının kurulması - RAG Mimarisi
 2- [X] (Retrieval) Vector database'de arama yapılır, en yakın embeddingler getirilir.
 2- [X] Bu embeddinglerden bir chain yapısı kullanılarak bir prompt oluşturulur ve llm'e gönderilir.
 3- [X] Cevap gelir ve kullanıcıya gösterilir. Konuşma devam eder.
-4- [ ] Kullanıcıdan gelen mesajlar ve cevaplar bir konuşma geçmişi olarak saklanmalı.
+4- [X] Kullanıcıdan gelen mesajlar ve cevaplar bir konuşma geçmişi olarak saklanmalı.
 5- [ ] Arayüz düzenlenmeli ve kullanıcı deneyimi iyileştirilmeli.
+
+
+[ ] TESTLER
 
 
 DAHA SONRA EKLENECEKLER

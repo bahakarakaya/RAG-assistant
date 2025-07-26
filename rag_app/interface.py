@@ -30,9 +30,24 @@ if uploaded_file is not None:
     file_processed = True
     st.success("File uploaded and processed successfully!", icon="✅")
 
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-query = st.chat_input("Ask your question:")
-if query:
-    with st.spinner("Generating response..."):
-        response = get_response(query)
-        st.write(response)
+# Accept user input
+if uploaded_file:
+    if query := st.chat_input("Hello?"):
+        for message in st.session_state.messages:
+            st.chat_message(message["role"]).write(message["content"])
+
+        # Display user message in chat message container
+        with st.chat_message("user"):
+            # Add user message to chat history
+            st.session_state.messages.append({"role": "user", "content": query})
+            st.markdown(query)
+
+        with st.spinner("Generating response..."):
+            response = get_response(query)
+        with st.chat_message("assistant"):
+            st.markdown(response)
+
+        st.session_state.messages.append({"role": "assistant", "content": response})
