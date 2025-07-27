@@ -11,7 +11,7 @@ from langchain_core.runnables import RunnableLambda
 from pinecone_manager import query_index
 
 client = OpenAI(api_key=OPENAI_API_KEY)
-llm = ChatOpenAI(api_key=OPENAI_API_KEY, model="gpt-4.1-mini", temperature=0.0, max_tokens=1024)
+llm = ChatOpenAI(api_key=OPENAI_API_KEY, model="gpt-4.1-mini", temperature=0.0)
 embedding_func = OpenAIEmbeddings(api_key=OPENAI_API_KEY, model="text-embedding-3-small")
 
 
