@@ -7,3 +7,4 @@ pinecone==7.3.0
 python-dotenv==1.1.1
 streamlit==1.47.0
 tiktoken==0.9.0
+pypdf
