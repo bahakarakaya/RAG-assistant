@@ -11,7 +11,7 @@ from langchain_core.runnables import RunnableLambda
 from pinecone_manager import query_index
 
 client = OpenAI(api_key=OPENAI_API_KEY)
-llm = ChatOpenAI(api_key=OPENAI_API_KEY, model="gpt-4.1-mini", temperature=0.0, max_tokens=512)
+llm = ChatOpenAI(api_key=OPENAI_API_KEY, model="gpt-4.1-mini", temperature=0.0, max_tokens=1024)
 embedding_func = OpenAIEmbeddings(api_key=OPENAI_API_KEY, model="text-embedding-3-small")
 
 
@@ -25,8 +25,8 @@ def load_doc(file_path: str) -> list[str]:
 
     splitter = RecursiveCharacterTextSplitter(
         separators=["\n\n", "\n", " ", ""],
-        chunk_size=300,
-        chunk_overlap=30
+        chunk_size=768,
+        chunk_overlap=76
     )
 
     return splitter.split_text(doc_data_str)
@@ -35,6 +35,7 @@ def load_doc(file_path: str) -> list[str]:
 def get_embeddings(text: str | list[str]) -> list[float]:
     model = "text-embedding-3-small"
     encoding = tiktoken.encoding_for_model(model)
+    MAX_TOKENS = 8191
 
     if isinstance(text, list):
         text = " ".join(text)
@@ -42,17 +43,15 @@ def get_embeddings(text: str | list[str]) -> list[float]:
         raise ValueError("Input must be a list of strings or a single string.")
 
     tokens = encoding.encode(text)
-
-    if len(tokens) > 8191:
-        MAX_TOKENS = 8191
+    print(len(tokens))
+    if len(tokens) > MAX_TOKENS:
         all_embeddings = []
 
         for i in range(0, len(tokens), MAX_TOKENS):
             chunk_tokens = tokens[i:i + MAX_TOKENS]
-            chunk = encoding.decode(chunk_tokens)
 
             response = client.embeddings.create(
-                input=chunk,
+                input=chunk_tokens,
                 model=model
             )
             embedding = response.data[0].embedding
