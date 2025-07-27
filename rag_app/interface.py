@@ -23,14 +23,13 @@ if uploaded_file is not None:
         upsert_to_pinecone([(str(i), embeddings, {'text': chunks[i]}) for i in range(len(chunks))])
 
     file_processed = True
-    st.success("File uploaded and processed successfully!", icon="✅")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
 # Accept user input
 if uploaded_file:
-    if query := st.chat_input("Hello?"):
+    if query := st.chat_input("Question about the document"):
         for message in st.session_state.messages:
             st.chat_message(message["role"]).write(message["content"])
 

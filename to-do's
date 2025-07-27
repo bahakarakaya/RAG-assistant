@@ -3,8 +3,7 @@ Streamlit kullanıcı arayüzünün Tasarımı
 1- [X] Uygulamanın başlığı ve kullanıcının ne yapması gerektiğini anlatan kısa bir açıklama olmalı.
 2- [X] Kullanıcının PDF dosyasını seçip yükleyebileceği st.file_uploader eklenmeli.
 3- [X] Kullanıcının mesajını yazacağı metin kutusu (chat_input ? text_input)
-4- [ ] Mesaj geçmişinin gösterileceği alan
-last active olayı
+4- [X] Mesaj geçmişinin gösterileceği alan
 
 
 Veri İşleme ve Vektörleştirme
@@ -26,11 +25,5 @@ Soru Cevap mantığının kurulması - RAG Mimarisi
 5- [ ] Arayüz düzenlenmeli ve kullanıcı deneyimi iyileştirilmeli.
 
 
-[ ] TESTLER
-
-
 DAHA SONRA EKLENECEKLER
 [ ] Langsmith
-
-BELKİ
-[ ] namespace yönetimi

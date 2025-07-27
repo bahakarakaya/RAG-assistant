@@ -24,8 +24,8 @@ def load_doc(file_path: str) -> list[str]:
 
     splitter = RecursiveCharacterTextSplitter(
         separators=["\n\n", "\n", " ", ""],
-        chunk_size=100,
-        chunk_overlap=15
+        chunk_size=150,
+        chunk_overlap=20
     )
 
     return splitter.split_text(doc_data_str)
