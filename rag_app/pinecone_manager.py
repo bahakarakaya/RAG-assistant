@@ -9,6 +9,7 @@ indexes_list = [pc_index['name'] for pc_index in pc.list_indexes()]
 if PINECONE_INDEX in indexes_list:
     index = pc.Index(PINECONE_INDEX)
 
+
 def pc_create_index_if_not_exists():
     if PINECONE_INDEX in indexes_list:
         return
@@ -23,11 +24,13 @@ def pc_create_index_if_not_exists():
         )
     )
 
+
 def upsert_to_pinecone(vectors: list[tuple[str, list[float], dict]]):
     index.upsert(
         vectors=vectors,
         namespace=namespace
     )
+
 
 def query_index(vector: list[float]):
     try:

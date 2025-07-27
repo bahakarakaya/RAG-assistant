@@ -4,16 +4,11 @@ from rag_engine import load_doc, get_embeddings, get_response
 import tempfile
 
 
-# TODO: implement this later
-# if idle_time > MAX_IDLE_SECONDS:
-#     pc.Index(PINECONE_INDEX).delete_namespace(st.session_state["namespace"])
-
-
 st.title("RAG Assistant", anchor=None, help=None, width="stretch")
 st.markdown("Q-A Assistant answers based on documents you uploaded. Only :rainbow[**PDF**] files can be uploaded", unsafe_allow_html=False, help=None, width="stretch")
 
 
-uploaded_file = st.file_uploader("Choose a file", type="pdf",accept_multiple_files=False)
+uploaded_file = st.file_uploader("Choose a file", type="pdf", accept_multiple_files=False)
 if uploaded_file is not None:
     with st.spinner("Processing your file..."):
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:

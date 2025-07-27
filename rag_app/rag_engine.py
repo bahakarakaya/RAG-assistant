@@ -1,6 +1,5 @@
 from openai import OpenAI
 import tiktoken
-#TODO: from streamlit import secrets
 from config import OPENAI_API_KEY
 from langchain_community.chat_models import ChatOpenAI
 from langchain_openai import OpenAIEmbeddings
@@ -14,21 +13,23 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 llm = ChatOpenAI(api_key=OPENAI_API_KEY, model="gpt-4.1-mini", temperature=0.0, max_tokens=512)
 embedding_func = OpenAIEmbeddings(api_key=OPENAI_API_KEY, model="text-embedding-3-small")
 
+
 def load_doc(file_path: str) -> list[str]:
     loader = PyPDFLoader(file_path)
     doc_data = loader.load()
 
     doc_data_str = ""
     for page in doc_data:
-         doc_data_str += page.page_content
+        doc_data_str += page.page_content
 
-    splitter = RecursiveCharacterTextSplitter(                          #TODO: check these later
+    splitter = RecursiveCharacterTextSplitter(
         separators=["\n\n", "\n", " ", ""],
         chunk_size=100,
         chunk_overlap=15
     )
 
     return splitter.split_text(doc_data_str)
+
 
 def get_embeddings(text: list[str] | str) -> list[float]:
     encoding = tiktoken.encoding_for_model("text-embedding-3-small")
@@ -48,6 +49,7 @@ def get_embeddings(text: list[str] | str) -> list[float]:
     )
     return response.data[0].embedding
 
+
 def _question_to_context(query: str):
     vector = get_embeddings(query)
     query_results = query_index(vector)
@@ -58,6 +60,7 @@ def _question_to_context(query: str):
     context = " ".join([m.metadata.get("text", "") for m in query_results.matches])
 
     return {"question": query, "context": context}
+
 
 def get_response(question: str) -> str:
     context_step = RunnableLambda(_question_to_context)
