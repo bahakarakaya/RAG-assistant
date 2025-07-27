@@ -1,15 +1,16 @@
 import streamlit as st
+from config import session_state
 from pinecone_manager import pc_create_index_if_not_exists, upsert_to_pinecone
 from rag_engine import load_doc, get_embeddings, get_response
 import tempfile
 
 
-st.title("RAG Assistant", anchor=None, help=None, width="stretch")
+st.title("RAG aAssistant", anchor=None, help=None, width="stretch")
 st.markdown("Q-A Assistant answers based on documents you uploaded. Only :rainbow[**PDF**] files can be uploaded", unsafe_allow_html=False, help=None, width="stretch")
 
 
 uploaded_file = st.file_uploader("Choose a file", type="pdf", accept_multiple_files=False)
-if uploaded_file is not None:
+if uploaded_file is not None and not st.session_state.get("file_processed", False):
     with st.spinner("Processing your file..."):
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
             temp_file.write(uploaded_file.read())
@@ -22,7 +23,10 @@ if uploaded_file is not None:
 
         upsert_to_pinecone([(str(i), embeddings, {'text': chunks[i]}) for i in range(len(chunks))])
 
-    file_processed = True
+    st.session_state["file_processed"] = True
+
+if uploaded_file is None:
+    st.session_state["file_processed"] = False
 
 if "messages" not in st.session_state:
     st.session_state.messages = []

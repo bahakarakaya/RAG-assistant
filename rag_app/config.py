@@ -25,3 +25,6 @@ if not OPENAI_API_KEY:
 session_state["namespace"] = None
 namespace = f"session_{str(uuid.uuid4())[:6]}"
 session_state["namespace"] = namespace
+
+if "file_processed" not in session_state:
+    session_state["file_processed"] = False
