@@ -2,6 +2,8 @@
 
 This project implements a Retrieval-Augmented Generation (RAG) assistant that can answer questions based on the content of a PDF file that you upload. The application is built with a Streamlit interface, utilizing OpenAI for language modeling and embeddings, Langchain to streamline the creation of the RAG pipeline and Pinecone for efficient vector storage and retrieval.
 
+![img_1.png](img_1.png)
+
 #### Follow the link for live demo: https://rag-assistant-baa.streamlit.app/
 
 ## Technologies Used
